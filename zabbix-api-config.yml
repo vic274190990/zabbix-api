@@ -1,0 +1,20 @@
+# Here is the user to call Zabbix API. The user should have necessary permission in the Zabbix.
+# You may opt to put your credential here, or you input your credential when executing the codes.
+user:
+  username: ugaoj001
+  password: gjz#570824&
+
+# You may opt to put Zabbix API URL here, or you input it when executing the codes.
+api_url: https://zabbix.yanfeng.com/api_jsonrpc.php
+
+logger_conf:
+  log_file_fullname: ../log/zabbix-api.log
+  # logger to choose per module. Refer to zabbix-api-logging.yml for more details.
+  loggers:
+    base_lib: debug_console
+    apiinfo: debug_console
+    user: debug_console
+    problem: debug_console
+    event: debug_console
+    trigger: debug_console
+    event_export_csv: debug_console

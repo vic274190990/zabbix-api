@@ -1,0 +1,51 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  standard:
+    format: '<%(asctime)s> <%(levelname)s> [%(threadName)s] [%(module)s, %(funcName)s] - %(message)s'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: standard
+    stream: ext://sys.stdout
+  timedRotatingFileHandler:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: standard
+    filename:
+    when: H
+    interval: 7
+    backupCount: 4
+    encoding: utf-8
+
+loggers:
+  debug_console:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+  info_console:
+    level: INFO
+    handlers: [ console ]
+    propagate: no
+  debug_console_n_timedRotatingFile:
+    level: DEBUG
+    handlers: [ console, timedRotatingFileHandler ]
+    propagate: no
+  info_console_n_timeRotatingFile:
+    level: INFO
+    handlers: [ console, timedRotatingFileHandler ]
+    propagate: no
+  warning_timedRotatingFile:
+    level: WARNING
+    handlers: [ timedRotatingFileHandler ]
+    propagate: no
+  error_timeRotatingFile:
+    level: ERROR
+    handlers: [ timedRotatingFileHandler ]
+    propagate: no
+  root:
+    level: DEBUG
+    handlers: [console]
