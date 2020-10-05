@@ -85,24 +85,6 @@ def convert_to_readable_time(secs):
     return time_readable
 
 
-def split_time_range(from_time, till_time, frequency):
-    from_time, to_time = pd.to_datetime(from_time), pd.to_datetime(till_time)
-    time_range = list(pd.date_range(from_time, to_time, freq='%sS' % frequency))
-    if to_time not in time_range:
-        time_range.append(to_time)
-    time_range = [item.strftime("%Y-%m-%d %H:%M:%S") for item in time_range]
-    time_ranges = []
-    for item in time_range:
-        f_time = item
-        t_time = (datetime.datetime.strptime(item, "%Y-%m-%d %H:%M:%S") + datetime.timedelta(seconds=frequency))
-        if t_time >= to_time:
-            t_time = to_time.strftime("%Y-%m-%d %H:%M:%S")
-            time_ranges.append([f_time, t_time])
-            break
-        time_ranges.append([f_time, t_time.strftime("%Y-%m-%d %H:%M:%S")])
-    return time_ranges
-
-
 class CsvFilename:
     @staticmethod
     def _verify_filename_suffix(input_filename):
